@@ -47,6 +47,7 @@ var facilities = []string{
 	"local7",
 }
 
+// Message is a struct describing a single syslog message
 type Message struct {
 	Priority  int
 	Facility  int
