@@ -1,4 +1,4 @@
-# rfc5424
+# rfc5424 [![GoDoc](https://godoc.org/github.com/tonimelisma/rfc5424?status.svg)](https://pkg.go.dev/mod/github.com/tonimelisma/rfc5424) [![Go Report Card](http://goreportcard.com/badge/tonimelisma/rfc5424)](http://goreportcard.com/report/tonimelisma/rfc5424) ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/tonimelisma/rfc5424) ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 Fast RFC5424 syslog message parser written in Go
 
 ## Usage
