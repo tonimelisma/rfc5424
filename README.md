@@ -44,9 +44,13 @@ log drain for Heroku, see [https://github.com/tonimelisma/golang-heroku-log-drai
 ## Caveats
 
 RFC5424 defines a way to transmit structured data messages in addition to the more typical free-form text log messages.
-This structured data is not parsed in any way. I've never actually seen any system use the data.
+This library does not parse this structured data. It is provided as-is in the ``Message`` field of the struct, just like
+regular unstructured log messages. I've never actually seen any system use the structured data, and most implementations
+break RFC5424 by transmitting unstructured data instead of structured in the seventh field, and thus parsing it as
+structured would break compatibility with most systems.
 
 ## Maintenance
 
-Although I will not update the software, I will attempt to answer opened
-issues or PRs in a reasonable timeframe.
+I consider this library feature-complete for my use cases and don't foresee much activity in the repository.
+However, *this software is still actively maintained*. Any issues or PRs will be dealt with in a reasonable
+amount of time.
