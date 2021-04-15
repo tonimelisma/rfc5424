@@ -24,56 +24,46 @@ func Test_readLength(t *testing.T) {
 
 func Test_parsePriority(t *testing.T) {
 	facility, severity := parsePriority(0)
-	assert.Equal(t, 0, facility)
-	assert.Equal(t, 0, severity)
+	assert.Equal(t, "kernel", facility)
+	assert.Equal(t, "emerg", severity)
 
 	facility, severity = parsePriority(165)
-	assert.Equal(t, 20, facility)
-	assert.Equal(t, 5, severity)
+	assert.Equal(t, "local4", facility)
+	assert.Equal(t, "notice", severity)
 }
 
 func Test_FacilityString(t *testing.T) {
-	var m Message
-	m.Facility = 0
-	facilityString, err := m.FacilityString()
+	facilityString, err := parseFacility(0)
 	assert.Equal(t, nil, err)
 	assert.Equal(t, "kernel", facilityString)
 
-	m.Facility = 23
-	facilityString, err = m.FacilityString()
+	facilityString, err = parseFacility(23)
 	assert.Equal(t, nil, err)
 	assert.Equal(t, "local7", facilityString)
 
-	m.Facility = -1
-	facilityString, err = m.FacilityString()
+	facilityString, err = parseFacility(-1)
 	assert.NotEqual(t, nil, err)
 	assert.Equal(t, "", facilityString)
 
-	m.Facility = 24
-	facilityString, err = m.FacilityString()
+	facilityString, err = parseFacility(24)
 	assert.NotEqual(t, nil, err)
 	assert.Equal(t, "", facilityString)
 }
 
 func Test_SeverityString(t *testing.T) {
-	var m Message
-	m.Severity = 0
-	severityString, err := m.SeverityString()
+	severityString, err := parseSeverity(0)
 	assert.Equal(t, nil, err)
 	assert.Equal(t, "emerg", severityString)
 
-	m.Severity = 7
-	severityString, err = m.SeverityString()
+	severityString, err = parseSeverity(7)
 	assert.Equal(t, nil, err)
 	assert.Equal(t, "debug", severityString)
 
-	m.Severity = -1
-	severityString, err = m.SeverityString()
+	severityString, err = parseSeverity(-1)
 	assert.NotEqual(t, nil, err)
 	assert.Equal(t, "", severityString)
 
-	m.Severity = 8
-	severityString, err = m.SeverityString()
+	severityString, err = parseSeverity(8)
 	assert.NotEqual(t, nil, err)
 	assert.Equal(t, "", severityString)
 }
@@ -82,8 +72,8 @@ func Test_Parse(t *testing.T) {
 	msg, err := Parse(bytes.NewReader(testMessage))
 	assert.Equal(t, nil, err)
 	assert.Equal(t, 40, msg.Priority)
-	assert.Equal(t, 5, msg.Facility)
-	assert.Equal(t, 0, msg.Severity)
+	assert.Equal(t, "syslog", msg.Facility)
+	assert.Equal(t, "emerg", msg.Severity)
 	assert.Equal(t, 1, msg.Version)
 	assert.Equal(t, "2012-11-30T06:45:29+00:00", msg.Timestamp)
 	assert.Equal(t, "host", msg.Hostname)
