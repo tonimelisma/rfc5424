@@ -7,7 +7,8 @@ Fast RFC5424 syslog message parser written in Go
 
 ## Example
 
-```func ExampleParseMultiple() {
+```
+func ExampleParseMultiple() {
 	testMessageBuffer := []byte(`83 <40>1 2012-11-30T06:45:29+00:00 host app web.3 - State changed from starting to up
 119 <40>1 2012-11-30T06:45:26+00:00 host app web.3 - Starting process with command 'bundle exec rackup config.ru -p 24405'
 `)
