@@ -99,4 +99,10 @@ func Test_ParseMultiple(t *testing.T) {
 	assert.Equal(t, nil, err)
 	assert.Equal(t, "State changed from starting to up", msgArray[0].Message)
 	assert.Equal(t, `Starting process with command 'bundle exec rackup config.ru -p 24405'`, msgArray[1].Message)
+
+	var empty []byte
+	var emptyArray []Message
+	msgArray, err = ParseMultiple(bytes.NewReader(empty))
+	assert.NotEqual(t, nil, err)
+	assert.Equal(t, msgArray, emptyArray)
 }
